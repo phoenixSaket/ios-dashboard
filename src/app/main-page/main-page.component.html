@@ -1,0 +1,58 @@
+<div class="main-container">
+
+    <div class="review-container">
+        <div class="card" *ngFor="let review of reviews; let i = index;">
+            <div class="heading-container w-100 d-flex justify-content-center">
+                <div class="heading-container w-100" *ngIf="i == 0">
+                    <div *ngFor="let name of appDetails" [ngClass]="name.altName == selectedApp ? 'w-100': 'w-0'">
+                        <div class="heading w-100 d-flex justify-content-between" *ngIf="name.altName == selectedApp">
+                            <div class="title bold">{{name.altName}} ( App Store Name : <b>{{name.name}}</b> )</div>
+                            <!-- <div class="count"><b>{{review[1].length}}</b> matching reviews</div> -->
+                            <div class="rating">
+                                Average Rating : <b>{{getTwoDigitRating(name.rating)}}</b> / 5
+                            </div>
+                        </div>
+                        <div class="navbar-container w-100" *ngIf="name.altName == selectedApp">
+                            <app-navbar [versions]="versions" [years]="this.years" (search)="filterByKeyword($event)">
+                            </app-navbar>
+                        </div>
+                        <div class="headings" *ngIf="name.altName == selectedApp">
+                            <div class="left-container pointer">
+                                Version
+                            </div>
+                            <div class="center-container">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <div class="sort pointer" *ngIf="!showSearch">
+                                        Rating
+                                    </div>
+                                    <div class="search-icon pointer" (click)="searchToggle()" *ngIf="!showSearch">
+                                        &#9906;
+                                    </div>
+                                </div>
+                                <div class="sort d-flex w-100 justify-content-between" *ngIf="showSearch">
+                                    <input type="text" placeholder="Search keyword in title / content"
+                                        class="search-input" (keyup)="filterByKeyword($event)" />
+                                    <div class="close-icon pointer" (click)="searchToggle()">
+                                        &#9932;
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-container pointer" (click)="sortByDate()">
+                                Date
+                                <span class="arrow" *ngIf="dateSort == 'DESC'">&#8595;</span>
+                                <span class="arrow" *ngIf="dateSort == 'ASC'">&#8593;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100" *ngIf="review[0] == selectedApp">
+
+                <div class="cards-container align-items-center w-100 d-flex column">
+                    <app-card class="w-100 d-flex justify-content-center" *ngFor="let detail of review[1]"
+                        [detail]="detail"></app-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

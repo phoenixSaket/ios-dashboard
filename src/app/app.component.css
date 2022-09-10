@@ -1,0 +1,25 @@
+.outer-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.sidebar-container {
+    height: 100%;
+    background-color: var(--light);
+    z-index: 1;
+    width: 300px;
+}
+
+.main-container {
+    background-color: var(--dark);
+    width: calc(100% - 300px)
+}
+
+.navbar-container {
+    height: max-content;
+    background-color: var(--light);
+}
+
+.inner-container {
+    overflow-y: auto;
+}
