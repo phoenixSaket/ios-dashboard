@@ -1,0 +1,26 @@
+.sidebar {
+    height: 100%;
+    border-right: 2px solid rgba(0,0,0,0.1);
+}
+
+.title {
+    padding: 20px 0;
+}
+
+.add-btn-container {
+    padding: 10px 0;
+}
+
+.apps {
+    gap: 10px;
+}
+
+.selected-app {
+    background-color: var(--navy);
+    color: var(--white);
+}
+
+.add-btn {
+    background-color: #cfdae1;
+    font-weight: 700;
+}

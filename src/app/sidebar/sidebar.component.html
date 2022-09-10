@@ -1,0 +1,16 @@
+<div class="w-100 sidebar d-flex align-items-center column">
+    <div class="title w-100 d-flex justify-content-center">IOS Review Dashboard</div>
+    <div class="add-btn-container w-100 apps w-100 d-flex column">
+        <button class="add-btn btn-app w-100 d-flex justify-content-center">Dashboard</button>
+    </div>
+    <!-- <div class="add-btn-container w-100">
+        <button class="btn-primary">+ Add App</button>
+    </div> -->
+    <div class="apps w-100 d-flex column">
+        <button class="btn-app w-100 d-flex justify-content-between" *ngFor="let app of apps"
+            [ngClass]="app.isSelected ? 'selected-app': ''" (click)="appSelection(app.altName)">
+            <div>{{app.altName}}</div>
+            <div><b>{{app.rating.toFixed(2)}}</b> / 5</div>
+        </button>
+    </div>
+</div>
