@@ -1,0 +1,19 @@
+<div class="navbar d-flex wrap w-100 justify-content-around">
+    <div class="rating-container d-flex">
+        <button class="box-button rating btn-primary">All</button>
+        <button class="box-button rating" [ngClass]="[rate.selected ? 'selected-rating' : '', 'bg-'+rate.rating + ' ']"
+            *ngFor="let rate of ratings">{{rate.rating}}</button>
+    </div>
+    <div class="sort-container">
+        <select>
+            <option value=-1>All Years</option>
+            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+    </div>
+    <div class="sort-container">
+        <select>
+            <option value="-1">All Versions</option>
+            <option *ngFor="let version of versions" [value]="version">{{version}}</option>
+        </select>
+    </div>
+</div>
