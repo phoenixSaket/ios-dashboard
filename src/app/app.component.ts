@@ -19,7 +19,7 @@ export class AppComponent {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    let appIds = ["584785907", "1112137390", "1337168006", "1337166340"];
+    let appIds = ["584785907", "1112137390", "1337168006", "1337166340", "1340456041"];
     appIds.forEach(id => {
       this.getData(id);
     });
@@ -111,12 +111,11 @@ export class AppComponent {
       case "1112137390": name = "AHNJ"; break;
       case "1337168006": name = "AHA"; break;
       case "1337166340": name = "IA"; break;
+      case "1340456041": name = "AH Caritas"; break;
       default: break;
     }
     return name;
   }
-
-  
 
   appSelected(app: string) {
     this.selectedApp = app;
