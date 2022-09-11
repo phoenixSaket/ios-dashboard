@@ -141,11 +141,12 @@ input {
 
 .btn-primary {
     background-color: #4d4dac;
-    color: white;
+    background-color: #e7e7e7;
+    color: #474747;
     box-shadow: 0 0 5px 1px grey;
     border-radius: 5px;
     width: 100%;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .btn-secondary {
