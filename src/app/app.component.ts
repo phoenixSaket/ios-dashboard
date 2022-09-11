@@ -39,7 +39,6 @@ export class AppComponent {
 
   getData(appId: string) {
     this.data.getDetails(appId).subscribe(data => {
-      // console.log(data);
       let app: any = {};
       app.name = data.results[0].trackName;
       app.rating = data.results[0].averageUserRating;

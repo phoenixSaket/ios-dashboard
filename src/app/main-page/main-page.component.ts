@@ -229,7 +229,6 @@ export class MainPageComponent implements OnInit {
 
       this.reviews.forEach((el, index) => {
         if (el[0] == this.selectedApp) {
-          console.log(el[1])
           if (check) {
             el[1] = el[1].filter((data: any) => {
               if (data["im:version"].label == version)
@@ -274,45 +273,28 @@ export class MainPageComponent implements OnInit {
   }
 
   filterByRating(ratings: number[]) {
-    console.log(ratings)
-    let check = false;
-    if (this.isFilterApplied) { check = true; }
     this.isFilterApplied = true;
+    let res: any[] = [];
+    this.reviews.forEach((el, index) => {
+      if (el[0] == this.selectedApp) {
 
-    let result: any[] = [];
-
-    if (ratings.length > 0) {
-      this.reviews.forEach((el, index) => {
-        if (el[0] == this.selectedApp) {
-
-          let res: any[] = [];
-          if (check) {
-            result = el[1].forEach((data: any) => {
-
-              ratings.forEach(rt => {
-                if (parseInt(data["im:rating"].label) == rt) {
-                  res.push(data);
-                }
-              })
-              this.reviews[index][1] = res;
+        for (let i = 0; i < this.backup[index][1].length; i++) {
+          const data = this.backup[index][1][i]
+          if (ratings.length > 0) {
+            ratings.forEach(rt => {
+              if (parseInt(data["im:rating"].label) == rt) {
+                res.push(data);
+              }
             })
           } else {
-            result = this.backup[index][1].forEach((data: any) => {
-              ratings.forEach(rt => {
-                if (parseInt(data["im:rating"].label) == rt) {
-                  res.push(data);
-                }
-              })
-              
-              this.reviews[index][1] = res;
-            })
+            res.push(data);
+            this.isFilterApplied = false;
+
           }
-          
         }
-      })
-    } else {
-      this.data.resetAllFilters.next(true);
-    }
+        this.reviews[index][1] = res;
+      }
+    });
 
   }
 
