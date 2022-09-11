@@ -117,6 +117,7 @@ export class AppComponent {
     return name;
   }
 
+
   appSelected(app: string) {
     this.selectedApp = app;
   }

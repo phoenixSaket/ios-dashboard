@@ -13,6 +13,7 @@ export class DataService {
   public versions: number[] = [];
   public yearSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public versionSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public resetAllFilters: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 

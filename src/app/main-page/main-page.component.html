@@ -16,7 +16,8 @@
 
                         </div>
                         <div class="navbar-container w-100" *ngIf="name.altName == selectedApp">
-                            <app-navbar [versions]="versions" [years]="this.years">
+                            <app-navbar [reviews]="reviews" [app]="selectedApp" (version)="selectedVersion($event)"
+                                (year)="selectedYear($event)" (rating)="filterByRating($event)">
                             </app-navbar>
                         </div>
                         <div class="headings" *ngIf="name.altName == selectedApp">

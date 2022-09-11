@@ -44,3 +44,12 @@ select {
     box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.5);
     width: 100%;
 }
+
+.selected-rating {
+    border: 2px solid khaki;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+}
