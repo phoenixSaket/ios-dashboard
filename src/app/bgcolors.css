@@ -1,31 +1,26 @@
 .bg-1 {
-    /* background-color: #eb3f3f; */
-    background-color: #979797;
-    color: white;
+    background-color: #eb3f3f;
+    /* background-color: #979797; */
 }
 
 .bg-2 {
-    /* background-color: #f5e050; */
-    background-color: #777777;
-    color: white;
+    background-color: #f5e050;
+    /* background-color: #777777; */
 }
 
 .bg-3 {
-    /* background-color: #dffadf; */
-    background-color: #575757;
-    color: white;
+    background-color: #dffadf;
+    /* background-color: #575757; */
 }
 
 .bg-4 {
-    /* background-color: #90EF90; */
-    background-color: #373737;
-    color: white;
+    background-color: #90EF90;
+    /* background-color: #373737; */
 }
 
 .bg-5 {
-    /* background-color: #04c900; */
-    background-color: #171717;
-    color: white;
+    background-color: #04c900;
+    /* background-color: #171717; */
 }
 
 .fg-1 {

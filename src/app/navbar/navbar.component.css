@@ -46,10 +46,11 @@ select {
 }
 
 .selected-rating {
-    border: 2px solid khaki;
+    border: 2px solid black;
 }
 
 .rating {
     display: flex;
     flex-direction: column;
+    font-weight: 700;
 }
