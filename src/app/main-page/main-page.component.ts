@@ -177,24 +177,28 @@ export class MainPageComponent implements OnInit {
 
   filterByRating(ratings: number[]) {
     let res: any[] = [];
-    this.reviews.forEach((el, index) => {
-      if (el[0] == this.selectedApp) {
+    if (ratings.length > 0) {
 
-        for (let i = 0; i < this.backup[index][1].length; i++) {
-          const data = this.backup[index][1][i]
-          if (ratings.length > 0) {
-            ratings.forEach(rt => {
-              if (parseInt(data["im:rating"].label) == rt) {
-                res.push(data);
-              }
-            })
-          } else {
-            res.push(data);
+      this.reviews.forEach((el, index) => {
+        if (el[0] == this.selectedApp) {
+          for (let i = 0; i < this.backup[index][1].length; i++) {
+            const data = this.backup[index][1][i]
+            if (ratings.length > 0) {
+              ratings.forEach(rt => {
+                if (parseInt(data["im:rating"].label) == rt) {
+                  res.push(data);
+                }
+              })
+            } else {
+              res.push(data);
+            }
           }
+          this.reviews[index][1] = res;
         }
-        this.reviews[index][1] = res;
-      }
-    });
+      });
+    } else {
+      this.data.resetAllFilters.next(true);
+    }
 
   }
 
