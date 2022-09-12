@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
       if (reset) {
         this.selectYearIndex = 0;
         this.selectVersionIndex = 0;
+        this.resetAllRatings();
       }
     })
   }
@@ -97,5 +98,11 @@ export class NavbarComponent implements OnInit {
     }
 
     this.rating.emit(this.selectedRatings);
+  }
+
+  resetAllRatings() {
+    this.ratings.forEach(el => {
+      el.selected = false;
+    });
   }
 }
