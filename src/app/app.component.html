@@ -1,4 +1,5 @@
 <div class="outer-container d-flex justify-content-center">
+  <app-dashboard [reviews]="reviews"></app-dashboard>
   <div class="sidebar-container">
     <app-sidebar [apps]="appNames" (appSelected)="appSelected($event)"></app-sidebar>
   </div>

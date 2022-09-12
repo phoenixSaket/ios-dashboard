@@ -15,6 +15,7 @@ export class AppComponent {
   public reviews: any[] = [];
   private updateReviews: BehaviorSubject<any> = new BehaviorSubject<any>({});
   public selectedApp: string = "";
+  public showDashboard: boolean = false;
 
   constructor(private data: DataService) { }
 
@@ -120,4 +121,6 @@ export class AppComponent {
   appSelected(app: string) {
     this.selectedApp = app;
   }
+
+  
 }

@@ -1,0 +1,31 @@
+<div *ngIf="showDash" class="dashboard-container">
+    <div class="inner-container shadows">
+        <div class="d-flex align-items-center justify-content-between w-100 heading">
+            <div>Dashboard</div>
+            <div class="close-icon pointer" (click)="closeDash()">&#9932;</div>
+        </div>
+        <div class="data-container">
+            <div class="app d-flex column" *ngFor="let app of reviews">
+                <div class="title-cotainer d-flex justify-content-between">
+                    <div class="bold italic title">
+                        {{app[0]}}
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="text">Total reviews : </span>
+                        <span class="bold">&nbsp;{{app[1].length}}</span>
+                    </div>
+                </div>
+
+                <div class="rating d-flex row-reverse justify-content-between">
+                    <div class="inner-rate" *ngFor="let rate of app[2].count; let i = index">
+                        <span class="text">{{i + 1}} Stars</span>
+                        <div class="value-container d-flex column">
+                            <span class="bold">{{rate.star}}</span>
+                            <span class="text">{{rate.percent}} %</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

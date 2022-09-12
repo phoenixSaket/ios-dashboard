@@ -32,4 +32,8 @@ export class SidebarComponent implements OnInit {
     });
     this.apps.find(data => data.altName == app).isSelected = true;
   }
+
+  openDashboard() {
+    this.data.openDashboard();
+  }
 }
