@@ -12,7 +12,9 @@
 
 .main-container {
     background-color: var(--dark);
-    width: calc(100% - 300px)
+    width: calc(100% - 300px);
+    display: flex;
+    align-items: center;
 }
 
 .navbar-container {

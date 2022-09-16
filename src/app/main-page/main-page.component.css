@@ -5,14 +5,17 @@
 }
 
 .heading-container {
-    background-color: var(--accent);
     position: sticky;
     top: 0;
     left: 0;
     display: flex;
-    max-width: 1440px;
     justify-content: center;
     font-weight: 700;
+}
+
+.heading-container-inner {
+    background-color: var(--accent);
+    max-width: 1440px;
 }
 
 .headings {

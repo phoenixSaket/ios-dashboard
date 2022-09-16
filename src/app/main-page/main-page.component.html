@@ -2,7 +2,7 @@
     <div class="review-container">
         <div class="card" *ngFor="let review of reviews; let i = index;">
             <div class="heading-container w-100 d-flex justify-content-center">
-                <div class="heading-container w-100" *ngIf="i == 0">
+                <div class="heading-container-inner w-100" *ngIf="i == 0">
                     <div *ngFor="let name of appDetails" [ngClass]="name.altName == selectedApp ? 'w-100': 'w-0'">
                         <div class="heading w-100 d-flex justify-content-between" *ngIf="name.altName == selectedApp">
                             <div class="title bold">{{name.altName}} ( App Store Name : <b>{{name.name}}</b> )</div>
