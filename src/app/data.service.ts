@@ -13,6 +13,8 @@ export class DataService {
   public versions: number[] = [];
   public yearSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public versionSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public resetAllFilters: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public openDash: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -96,6 +98,14 @@ export class DataService {
       array.push(entry);
     }
     return array;
+  }
+
+  openDashboard() {
+    this.openDash.next(true);
+  }
+
+  closeDashboard() {
+    this.openDash.next(false);
   }
 
 }

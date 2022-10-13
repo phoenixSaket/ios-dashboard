@@ -14,7 +14,6 @@ export class MainPageComponent implements OnInit {
   public years: number[] = [];
   private backup: any[] = [];
   public showSearch: boolean = false;
-  private isFilterApplied: boolean = false;
   public dateSort: string = "DESC";
   public versionSort: string = "DESC";
   public ratingSort: string = "DESC";
@@ -28,7 +27,6 @@ export class MainPageComponent implements OnInit {
     this.data.shouldUpdate.subscribe(data => {
       if (data && !!this.appReviews[0]) {
         this.reviews = Object.entries(this.appReviews[0]);
-        this.getVersions();
         this.getYears();
         this.cdr.detectChanges();
         this.backup = JSON.parse(JSON.stringify(this.reviews));
@@ -37,25 +35,17 @@ export class MainPageComponent implements OnInit {
           el.count = this.getCount(el.altName);
         })
       }
+    });
+
+    this.data.resetAllFilters.subscribe(data => {
+      if (data) {
+        this.reviews = JSON.parse(JSON.stringify(this.backup));
+      }
     })
   }
 
   getTwoDigitRating(rating: number): string {
     return rating.toFixed(2);
-  }
-
-  getVersions() {
-    const reviews = this.reviews;
-    let versions: any[] = [];
-
-    reviews.forEach((entry: any[]) => {
-      entry[1].forEach((el: any) => {
-        versions = this.data.addIfNotPresent(el['im:version'].label, versions);
-      })
-    })
-
-    versions = this.data.sortArray(versions);
-    this.versions = versions;
   }
 
   getYears() {
@@ -73,21 +63,6 @@ export class MainPageComponent implements OnInit {
     this.years = years;
   }
 
-  filterByKeyword(input: any, app: string) {
-    input = input.target.value;
-
-    for (let i = 0; i < this.reviews.length; i++) {
-      if (this.reviews[i][0] == app) {
-        this.reviews[i][1] = this.backup[i][1].filter((data: any) => {
-          if (data.title.label.includes(input) || data.content.label.includes(input))
-            return data
-        });
-        break;
-      }
-    }
-    this.isFilterApplied = true;
-  }
-
   searchToggle(selectedApp: string) {
     this.showSearch = !this.showSearch;
     if (this.showSearch == false) {
@@ -98,31 +73,17 @@ export class MainPageComponent implements OnInit {
 
   sortByDate(app: string) {
     this.dateSort = this.setASCorDESC(this.dateSort);
-
     this.reviews.forEach((el, index) => {
-
       if (el[0] == app) {
-        if (this.isFilterApplied) {
-          el[1] = el[1].sort((a: any, b: any) => {
-            let aDate = new Date(a.updated.label).getTime();
-            let bDate = new Date(b.updated.label).getTime();
+        el[1] = el[1].sort((a: any, b: any) => {
+          let aDate = new Date(a.updated.label).getTime();
+          let bDate = new Date(b.updated.label).getTime();
 
-            if (this.dateSort == "ASC") return aDate - bDate;
-            else if (this.dateSort == "DESC") return bDate - aDate;
+          if (this.dateSort == "ASC") return aDate - bDate;
+          else if (this.dateSort == "DESC") return bDate - aDate;
 
-            return null;
-          });
-        } else {
-          el[1] = this.backup[index][1].sort((a: any, b: any) => {
-            let aDate = new Date(a.updated.label).getTime();
-            let bDate = new Date(b.updated.label).getTime();
-
-            if (this.dateSort == "ASC") return aDate - bDate;
-            else if (this.dateSort == "DESC") return bDate - aDate;
-
-            return null;
-          });
-        }
+          return null;
+        });
       }
     })
 
@@ -133,27 +94,15 @@ export class MainPageComponent implements OnInit {
     this.reviews.forEach((el, index) => {
 
       if (el[0] == app) {
-        if (this.isFilterApplied) {
-          el[1] = el[1].sort((a: any, b: any) => {
-            let aVersion = (a["im:version"].label).replaceAll('.', '');
-            let bVersion = (b["im:version"].label).replaceAll('.', '');
+        el[1] = el[1].sort((a: any, b: any) => {
+          let aVersion = (a["im:version"].label).replaceAll('.', '');
+          let bVersion = (b["im:version"].label).replaceAll('.', '');
 
-            if (this.versionSort == "ASC") return aVersion - bVersion;
-            else if (this.versionSort == "DESC") return bVersion - aVersion;
+          if (this.versionSort == "ASC") return aVersion - bVersion;
+          else if (this.versionSort == "DESC") return bVersion - aVersion;
 
-            return null;
-          });
-        } else {
-          el[1] = this.backup[index][1].sort((a: any, b: any) => {
-            let aVersion = (a["im:version"].label).replaceAll('.', '');
-            let bVersion = (b["im:version"].label).replaceAll('.', '');
-
-            if (this.versionSort == "ASC") return aVersion - bVersion;
-            else if (this.versionSort == "DESC") return bVersion - aVersion;
-
-            return null;
-          });
-        }
+          return null;
+        });
       }
     })
   }
@@ -161,41 +110,18 @@ export class MainPageComponent implements OnInit {
   sortByRating(app: string) {
     this.ratingSort = this.setASCorDESC(this.ratingSort);
     this.reviews.forEach((el, index) => {
-
       if (el[0] == app) {
-        if (this.isFilterApplied) {
-          el[1] = el[1].sort((a: any, b: any) => {
-            let aRating = (a["im:rating"].label);
-            let bRating = (b["im:rating"].label);
+        el[1] = el[1].sort((a: any, b: any) => {
+          let aRating = (a["im:rating"].label);
+          let bRating = (b["im:rating"].label);
 
-            if (this.ratingSort == "ASC") return aRating - bRating;
-            else if (this.ratingSort == "DESC") return bRating - aRating;
+          if (this.ratingSort == "ASC") return aRating - bRating;
+          else if (this.ratingSort == "DESC") return bRating - aRating;
 
-            return null;
-          });
-        } else {
-          el[1] = this.backup[index][1].sort((a: any, b: any) => {
-            let aRating = (a["im:rating"].label);
-            let bRating = (b["im:rating"].label);
-
-            if (this.ratingSort == "ASC") return aRating - bRating;
-            else if (this.ratingSort == "DESC") return bRating - aRating;
-
-            return null;
-          });
-        }
+          return null;
+        });
       }
     })
-  }
-
-  setASCorDESC(variable: string) {
-    if (variable == "ASC") {
-      variable = "DESC";
-    } else if (variable == "DESC") {
-      variable = "ASC";
-    }
-
-    return variable;
   }
 
   getCount(name: string) {
@@ -206,5 +132,101 @@ export class MainPageComponent implements OnInit {
       }
     })
     return count;
+  }
+
+  filterByVersion(version: any) {
+    if (version == -1) {
+      this.data.resetAllFilters.next(true);
+    } else {
+      this.reviews.forEach((el) => {
+        if (el[0] == this.selectedApp) {
+          el[1] = el[1].filter((data: any) => {
+            if (data["im:version"].label == version)
+              return data
+          });
+        }
+      })
+    }
+  }
+
+  filterByYear(year: any) {
+    let check = false;
+
+    if (year == -1) {
+      this.data.resetAllFilters.next(true);
+    } else {
+      this.reviews.forEach((el, index) => {
+        if (el[0] == this.selectedApp) {
+          if (check) {
+            el[1] = el[1].filter((data: any) => {
+              if (new Date(data.updated.label).getFullYear() == year) {
+                return data;
+              }
+            })
+          } else {
+            el[1] = this.backup[index][1].filter((data: any) => {
+              if (new Date(data.updated.label).getFullYear() == year) {
+                return data;
+              }
+            })
+          }
+        }
+      })
+    }
+  }
+
+  filterByRating(ratings: number[]) {
+    let res: any[] = [];
+    if (ratings.length > 0) {
+
+      this.reviews.forEach((el, index) => {
+        if (el[0] == this.selectedApp) {
+          for (let i = 0; i < this.backup[index][1].length; i++) {
+            const data = this.backup[index][1][i]
+            if (ratings.length > 0) {
+              ratings.forEach(rt => {
+                if (parseInt(data["im:rating"].label) == rt) {
+                  res.push(data);
+                }
+              })
+            } else {
+              res.push(data);
+            }
+          }
+          this.reviews[index][1] = res;
+        }
+      });
+    } else {
+      this.data.resetAllFilters.next(true);
+    }
+
+  }
+
+  filterByKeyword(input: any, app: string) {
+    input = input.target.value;
+    if (input == "") {
+      this.data.resetAllFilters.next(true);
+    } else {
+      for (let i = 0; i < this.reviews.length; i++) {
+        if (this.reviews[i][0] == app) {
+
+          this.reviews[i][1] = this.backup[i][1].filter((data: any) => {
+            if (data.title.label.includes(input) || data.content.label.includes(input))
+              return data
+          });
+          break;
+        }
+      }
+    }
+  }
+
+  setASCorDESC(variable: string) {
+    if (variable == "ASC") {
+      variable = "DESC";
+    } else if (variable == "DESC") {
+      variable = "ASC";
+    }
+
+    return variable;
   }
 }

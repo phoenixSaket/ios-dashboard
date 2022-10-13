@@ -15,6 +15,7 @@ export class AppComponent {
   public reviews: any[] = [];
   private updateReviews: BehaviorSubject<any> = new BehaviorSubject<any>({});
   public selectedApp: string = "";
+  public showDashboard: boolean = false;
 
   constructor(private data: DataService) { }
 
@@ -39,7 +40,7 @@ export class AppComponent {
 
   getData(appId: string) {
     this.data.getDetails(appId).subscribe(data => {
-      // console.log(data);
+      console.log(data)
       let app: any = {};
       app.name = data.results[0].trackName;
       app.rating = data.results[0].averageUserRating;
@@ -117,7 +118,10 @@ export class AppComponent {
     return name;
   }
 
+
   appSelected(app: string) {
     this.selectedApp = app;
   }
+
+  
 }

@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './card/card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CardComponent } from './card/card.component';
     NavbarComponent,
     MainPageComponent,
     CardComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

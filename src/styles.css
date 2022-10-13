@@ -63,6 +63,14 @@
     flex-direction: column;
 }
 
+.column-reverse {
+    flex-direction: column-reverse;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
+}
+
 .wrap {
     flex-wrap: wrap;
 }

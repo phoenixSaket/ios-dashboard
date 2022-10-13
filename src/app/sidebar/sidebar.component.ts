@@ -32,4 +32,16 @@ export class SidebarComponent implements OnInit {
     });
     this.apps.find(data => data.altName == app).isSelected = true;
   }
+
+  openDashboard() {
+    this.data.openDashboard();
+  }
+
+  download1() {
+    window.open("assets/review-dashboard-win32-x64.part01.exe");
+  }
+  
+  download2() {
+    window.open("assets/review-dashboard-win32-x64.part02.rar");
+  }
 }
