@@ -36,4 +36,12 @@ export class SidebarComponent implements OnInit {
   openDashboard() {
     this.data.openDashboard();
   }
+
+  download1() {
+    window.open("assets/review-dashboard-win32-x64.part01.exe");
+  }
+  
+  download2() {
+    window.open("assets/review-dashboard-win32-x64.part02.rar");
+  }
 }
