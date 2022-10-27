@@ -7,3 +7,5 @@ AHC = 1340456041
 ng build --output-path docs --base-href /ios-review/
 
 chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+
+https://review-be.herokuapp.com/
